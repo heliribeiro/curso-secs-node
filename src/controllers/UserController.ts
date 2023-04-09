@@ -14,7 +14,7 @@ class UserController {
 
     userService.create({ name, email, password });
 
-    return res.status(201).json(userBodySchema);
+    return res.status(201).send();
   }
 }
 

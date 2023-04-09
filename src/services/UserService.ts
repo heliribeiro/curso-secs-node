@@ -1,5 +1,5 @@
 import { prisma } from "../../connection";
-import zod from "zod";
+import { hash } from "bcrypt";
 interface IUser {
   name: string;
   email: string;
@@ -8,11 +8,13 @@ interface IUser {
 
 class UserService {
   async create({ name, email, password }: IUser) {
+    let password_hash = await hash(password, 6);
+
     await prisma.user.create({
       data: {
         name,
         email,
-        password_hash: password,
+        password_hash,
       },
     });
   }
