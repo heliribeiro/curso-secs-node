@@ -10,6 +10,14 @@ class UserService {
   async create({ name, email, password }: IUser) {
     let password_hash = await hash(password, 6);
 
+    let userAlreadExists = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (userAlreadExists) {
+      throw new Error(`User ${name} already exists`);
+    }
+
     await prisma.user.create({
       data: {
         name,

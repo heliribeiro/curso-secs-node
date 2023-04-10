@@ -10,9 +10,13 @@ class UserController {
       password: Zod.string().min(6),
     });
 
-    const { name, email, password } = userBodySchema.parse(req.body);
+    try {
+      const { name, email, password } = userBodySchema.parse(req.body);
 
-    userService.create({ name, email, password });
+      await userService.create({ name, email, password });
+    } catch (error) {
+      return res.status(409).send();
+    }
 
     return res.status(201).send();
   }
