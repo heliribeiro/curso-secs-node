@@ -26,6 +26,14 @@ class UserService {
       },
     });
   }
+
+  async show(id: string) {
+    const user = await prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      throw new Error(`User does not exist`);
+    }
+    return user;
+  }
 }
 
 export default new UserService();

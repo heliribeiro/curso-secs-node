@@ -20,6 +20,16 @@ class UserController {
 
     return res.status(201).send();
   }
+
+  async show(req: Request, res: Response) {
+    const { userId } = req;
+    try {
+      const user = await userService.show(userId);
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(404).send();
+    }
+  }
 }
 
 export { UserController };

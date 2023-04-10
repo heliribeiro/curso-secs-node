@@ -11,8 +11,11 @@ class AuthenticateController {
 
     try {
       const { email, password } = userBodySchema.parse(req.body);
-      const user = await authenticateService.create({ email, password });
-      return res.status(201).send(user);
+      const { user, token } = await authenticateService.create({
+        email,
+        password,
+      });
+      return res.status(201).send({ user, token });
     } catch (error) {
       return res.status(401).send();
     }

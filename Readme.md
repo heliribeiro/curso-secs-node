@@ -2,8 +2,8 @@
 
 ## RFs (Requisitos funcionais)
 
-- [ ] Deve ser possível se cadastrar;
-- [ ] Deve ser possível se autenticar;
+- [X] Deve ser possível se cadastrar;
+- [x] Deve ser possível se autenticar;
 - [ ] Deve ser possível obter o perfil um usuário logado;
 - [ ] Deve ser possível cadastrar uma atividade com um tempo associado;
 - [ ] Deve ser possível o usuário logado obter a lista das suas atividades;
@@ -11,7 +11,7 @@
 
 ## RNs ( Regras de negócio)
 
-- [ ] O usuário não deve poder se cadastrar com um e-mail duplicado;
+- [X] O usuário não deve poder se cadastrar com um e-mail duplicado;
 - [ ] 
 
 ## RNFs ( Requisitos não-funcionais)

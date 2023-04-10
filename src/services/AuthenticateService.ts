@@ -1,16 +1,13 @@
-import { User } from "@prisma/client";
 import { prisma } from "../../connection";
 import { compare, hash } from "bcrypt";
-
+import { sign } from "jsonwebtoken";
 interface IAuthenticate {
   email: string;
   password: string;
 }
 
 class AuthenticateService {
-  async create({ email, password }: IAuthenticate): Promise<User> {
-    let password_hash = await hash(password, 6);
-
+  async create({ email, password }: IAuthenticate) {
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -24,7 +21,15 @@ class AuthenticateService {
       throw new Error("Email ou senha não encontrados");
     }
 
-    return user;
+    const token = sign({}, "minhachavesecreta", {
+      subject: user.id,
+      expiresIn: "1d",
+    });
+
+    return {
+      user,
+      token,
+    };
   }
 }
 

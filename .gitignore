@@ -4,3 +4,4 @@ yarn.lock
 database.db-journal
 database.db
 yarn-error.log
+database.db
